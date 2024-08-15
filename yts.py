@@ -24,7 +24,7 @@ soup=BeautifulSoup(doc,'html.parser')
 #print(soup.prettify())
 
 #lets print the title of page
-print(soup.title.string)
+#print(soup.title.string)
 
 """"
 #finding all div tag
@@ -37,3 +37,8 @@ with open("P:\Working Directories\Web Scrapping\Web Scrapping Training\div_tag.t
 
 
 
+names=soup.find_all('a',class_="browse-movie-title")
+#print(str(names))
+
+for n in names:
+    print(n.text)
