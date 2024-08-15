@@ -1,0 +1,9 @@
+soup=BeautifulSoup(response.text,'html.parser')
+path=r"P:\Working Directories\Web Scrapping\Web Scrapping Training\file.html"
+with open(path,'w') as file:
+    file.write(str(soup))
+
+
+
+1. In this code remeber soup is the soup  is the object of BeautifulSoup therefore you would need add str for soup to parse it
+2. Also r would be required to  read the path from source and considered path as string literal not breakable string
