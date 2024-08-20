@@ -32,49 +32,8 @@ with open(path,'r',encoding="utf-8") as f:
 soup=BeautifulSoup(s,'html.parser')
 #print(soup.prettify())
 
-'''
-# Find all movie sections
-movie_sections = soup.find_all('div', class_='browse-movie-wrap')
 
-# Extract details for each movie
-movies = []
-
-for movie in movie_sections:
-    # Extract movie name
-    movie_name_tag = movie.find('a', class_='browse-movie-title')
-    movie_name = movie_name_tag.get_text(strip=True).replace('[GL]', '').replace('[EN]', '').strip() if movie_name_tag else 'none'
-
-    # Extract year
-    movie_year_tag = movie.find('div', class_='browse-movie-year')
-    movie_year = movie_year_tag.get_text(strip=True) if movie_year_tag else 'none'
-
-    # Extract rating
-    rating_tag = movie.find('h4', class_='rating')
-    rating = rating_tag.get_text(strip=True) if rating_tag else 'none'
-
-    # Extract genre
-    genre_tag = movie.find('figcaption').find('h4') if movie.find('figcaption') else None
-    genre = genre_tag.get_text(strip=True) if genre_tag and genre_tag.text != 'Rating' else 'none'
-
-    # Append extracted movie details to the list
-    movies.append({
-        'Name': movie_name,
-        'Year': movie_year,
-        'Rating': rating,
-        'Genre': genre
-    })
-
-# Print results for all movies
-for movie in movies:
-    print(f"Movie Name: {movie['Name']}")
-    print(f"Year: {movie['Year']}")
-    print(f"Rating: {movie['Rating']}")
-    print(f"Genre: {movie['Genre']}")
-    print()
-
-'''
-
-
+#<<<<<<<<<<<<<<<Printing the information one by one from each movie>>>>>>>>>>>>>>>>>>>>
 
 """ 
 #Titles of all the movies on page
@@ -140,6 +99,9 @@ for movie in movies:
     rating = rating_tag.text.strip() if rating_tag else 'Rating not available'
     print(rating)
     
+
+
+    #****..........continue with similar code...........*****
 
 
 """ #Lets create a dataframe to save this data
