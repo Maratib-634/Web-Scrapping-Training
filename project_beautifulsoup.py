@@ -3,6 +3,7 @@ PROJECT REQUIREMENTS:
 1. Movies, year, Rating, Genre
 2. Save them in pandas
 3. Do some analysis
+4. Scrapping from multiple pages
 
 '''
 
@@ -110,4 +111,80 @@ dct={"Titles":titles,"Years":year,"Rattings":rattings}
 df=pd.DataFrame(dct)
 #df=pd.DataFrame(list(zip(titles,year)),columns=['Titles','Year'])
 print(df) """
+
+
+
+#*****Lets Scrape the data from Multiple pages Using beautiful_Soup******
+#Search for NEXT tag(move towards next page) >> create its soup >> Create Loop >> Iterate to each page to extract data
+
+
+
+
+""" #lets get url of each page
+url="https://yts.mx/browse-movies"
+response=requests.get(url)
+html=response.text
+soup=BeautifulSoup(html,"html.parser") """
+#print(soup)
+titles=[]
+years=[]
+rattings=[]
+genres=[]
+
+
+for i in range(1,10):
+    url=url="https://yts.mx/browse-movies"+"?page="+str(i)
+    response=requests.get(url)
+    html=response.text
+    soup=BeautifulSoup(html,"html.parser")
+
+
+    
+    block=soup.find_all('div',class_="browse-movie-wrap")
+   
+
+    for movie in block:
+        title_tag=movie.find('a',class_='browse-movie-title')
+        title=title_tag.text.strip() if title_tag else "No title"
+        titles.append(title)
+
+
+        year_tag=movie.find('div',class_='browse-movie-year')
+        year=year_tag.text.strip() if year_tag else "No Year"
+        years.append(year)
+
+        ratting_tag=movie.find('h4',class_="rating")
+        ratting=ratting_tag.text.strip() if ratting_tag else "No rattings"
+        rattings.append(ratting)
+
+
+        genre=[genre.text.strip() for genre in movie.find_all('h4') if genre.get('class') is None]
+        if not genre:
+            genre=["No genre"]
+        genres.append(genre)
+
+
+                
+       
+        """ print(f"Title: {title}")=-mnmgfe3
+        print(f"Year: {year}")
+        print(f"Rating: {ratting}")
+        print(f"Genres: {', '.join(genre)}")
+        print("-" * 40)   """
+
+""" 
+print(len(titles))
+print(len(years))
+print(len(rattings))
+print(len(genres))
+     """
+    
+       
+
+import pandas as pd
+dict={"Titles":titles,"Years":years,"Rattings":ratting,'Genre':genres}
+df=pd.DataFrame(dict)
+df.to_csv("YTS_movies.csv",index=False)
+#print(df) 
+
 
